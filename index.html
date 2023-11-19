@@ -21,6 +21,7 @@
 
     <!-- Sección de Bienvenida -->
     <section id="welcome-section" class="welcome-section">
+        <h1 id="welcome-hello">Hello! I'm Nico</h1>
         <div id="text-container">
             <h1 id="welcome-text"></h1>
             <h1 id="welcome-underscore">_</h1>
@@ -50,23 +51,52 @@
             const welcomeText = document.getElementById("welcome-text");
             const welcomeUnderscore = document.getElementById("welcome-underscore");
 
-            const text = "Welcome to Nicolás Gamba's portfolio!";
+            const texts = [
+                "¡",
+                "¡And I'm a developer!",
+                "¡And I'm a ",
+                "¡And I'm a guitarist!",
+                "¡",
+                "¡Y soy desarrollador!",
+                "¡Y soy ",
+                "¡Y soy programador!",
+                "¡Y soy ",
+                "¡Y soy guitarrista!",
+            ];
             const blinkInterval = 500; // Intervalo de parpadeo en milisegundos
+            const resetInterval = 1500; // Intervalo de reinicio de texto
 
             let index = 0;
+            let textIndex = 0;
+            let isTextIndexGoingUp = true;
 
             function displayText() {
-                if (index < text.length) {
-                    welcomeText.textContent += text[index];
+                if (index < texts[textIndex].length) {
+                    welcomeText.textContent += texts[textIndex][index];
                     index++;
                     setTimeout(displayText, 100); // Ajusta la velocidad de aparición de los caracteres
+                } else if (index > texts[textIndex].length) {
+                    welcomeText.textContent = welcomeText.textContent.substring(0, welcomeText.textContent.length - 1);
+                    index--;
+                    setTimeout(displayText, 100);
                 } else {
-                    setInterval(() => {
-                        welcomeUnderscore.classList.toggle("blink");
-                    }, blinkInterval);
+                    setTimeout(changeText, resetInterval);
                 }
             }
 
+            function changeText() {
+                isTextIndexGoingUp ? textIndex++ : textIndex--;
+                if (textIndex == 0) {
+                    isTextIndexGoingUp = true;
+                } else if (textIndex == texts.length - 1) {
+                    isTextIndexGoingUp = false;
+                }
+                displayText();
+            }
+
+            setInterval(() => {
+                welcomeUnderscore.classList.toggle("blink");
+            }, blinkInterval);
             displayText();
         });
     </script>

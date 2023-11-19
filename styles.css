@@ -144,3 +144,8 @@ body {
 #text-container h1 {
     display: inline-block;
 }
+
+#welcome-hello {
+    font-size: 500%;
+    color: #530a0a;
+}
