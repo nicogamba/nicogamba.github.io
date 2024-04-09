@@ -1,151 +1,263 @@
-/* Reset de estilos */
-body,
-h1,
-h2,
-p,
-ul,
-li,
-a {
-    margin: 0;
-    padding: 0;
-    border: 0;
+/* colores: #5f9281 #396154 #3a494a */
+:root {
+    --color05: rgb(166, 216, 197);
+    --color10: #5f9281;
+    --color20: #396154;
+    --color30: #3a494a;
 }
 
-/* Estilo global del cuerpo */
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    background-color: var(--color10);
+}
+
+/* Estilos para la barra de navegación */
+nav {
+    background-color: var(--color20);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+}
+
+/* Estilos para el logo */
+nav .logo img {
+    width: 75px;
+    /* Ajusta el tamaño según tus necesidades */
+    height: auto;
+}
+
+/* Estilos para las secciones */
+.secciones a {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px 20px;
+}
+
+/* Efecto de aclarado al pasar por encima */
+.secciones a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    transition: background-color 0.3s ease;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    nav {
+        display: none;
+    }
+
+    /* Oculta las secciones en dispositivos móviles */
+    .secciones {
+        display: none;
+    }
+
+    .logo img {
+        display: none;
+        /* Centra el logo */
+    }
+}
+
+
+
+/* Estilos para la sección principal */
+.principal {
+    width: 100%;
+    /* Ajusta la sección al ancho de la pantalla */
+}
+
+/* Estilos para la imagen dentro de la sección principal */
+.principal img {
+    display: block;
+    margin: auto;
+    width: 25%;
+    /* Ajusta la imagen al ancho de la sección */
+    height: auto;
+}
+
+@media only screen and (max-width: 600px) {
+    .principal img {
+        display: block;
+        margin: auto;
+        width: 100%;
+        /* Ajusta la imagen al ancho de la sección */
+        height: auto;
+    }
+}
+
+
+
+
+/* Estilos para la sección de las 6 imágenes */
+.imagenes {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+/* Estilos para cada fila de imágenes */
+.fila {
+    width: 100%;
+    display: flex;
+}
+
+/* Estilos para cada imagen */
+.imagen-tercio {
+    width: calc(33.33% - 10px);
+    /* Un tercio del ancho de la pantalla, restando el margen */
+    margin-bottom: 20px;
+    /* Espacio entre las imágenes */
+}
+
+/* Estilos para las imágenes */
+.imagen-tercio img {
+    width: 100%;
+    /* Ajustar la imagen al ancho de su contenedor */
+}
+
+/* Ocultar la sección en dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    .imagenes {
+        display: none;
+    }
+}
+
+
+
+/* Estilos para la sección de comidas */
+#comidas {
+    background-color: var(--color20);
+}
+
+#comidas h1 {
+    align-items: center;
+    margin: 20px auto;
+    color: whitesmoke;
+}
+
+.comidas {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+/* Estilos para cada comida */
+.comida {
+    width: calc(100% - 20px);
+    /* Un tercio del ancho de la pantalla, restando el margen */
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    background-color: var(--color05);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+/* Estilos para la imagen de cada comida */
+.comida .imagen {
+    flex: 1;
+    order: 0;
+}
+
+.comida .imagen img {
+    width: 100%;
+    height: auto;
+}
+
+/* Estilos para la información de cada comida */
+.comida .info {
+    flex: 2;
+    order: 1;
+    padding: 20px;
+}
+
+.comida .infoizq {
+    flex: 2;
+    order: -1;
+    padding: 20px;
+}
+
+/* Estilos para dispositivos móviles */
+@media only screen and (max-width: 600px) {
+    .comida {
+        display: block;
+        /* 100% del ancho de la pantalla, restando el margen */
+    }
+}
+
+
+
+
+/* Estilos para la sección de redes sociales */
+.redes {
+    background-color: var(--color20);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+}
+
+/* Estilos para cada red social */
+.red {
+    margin-bottom: 10px;
+}
+
+.red img {
+    width: 30px;
+    /* Ajusta el tamaño del ícono según tus necesidades */
+    height: 30px;
+    margin-right: 10px;
+}
+
+.red a {
+    color: white;
+    /* Color del texto */
+    text-decoration: none;
+}
+
+.red a:hover {
+    text-decoration: none;
+    /* Efecto de subrayado al pasar el mouse */
+}
+
+
+
+
+
+/* Estilos para la sección "Acerca de Nosotros" */
+.acerca {
+    padding: 20px;
+    background-color: var(--color10);
+    text-align: center;
+}
+
+.acerca h2 {
+    margin-bottom: 10px;
+    color: whitesmoke;
+}
+
+.acerca p {
+    color: whitesmoke;
     line-height: 1.6;
 }
 
-/* Barra de Navegación */
-.navbar {
-    background-color: #333;
-    position: fixed;
-    width: 100%;
-    top: 0;
-    z-index: 1000;
-}
 
-.navbar-ul {
-    list-style: none;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    height: 50px;
-}
 
-.navbar-ul a {
-    text-decoration: none;
-    color: #fff;
-    font-weight: bold;
-}
 
-/* Sección de Bienvenida */
-.welcome-section {
-    background-color: #f2f2f2;
-    text-align: center;
-    padding: 80px 0;
-    height: 90vh;
-    width: 100%;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-}
-
-.welcome-section h1 {
-    color: #333;
-}
-
-/* Sección de Proyectos */
-.projects-section {
-    padding: 40px 0;
-}
-
-.project-tile {
-    background-color: #fff;
-    padding: 20px;
-    margin-bottom: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.project-tile h2 {
-    color: #333;
-}
-
-.project-tile p {
-    color: #666;
-}
-
-.project-tile a {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #333;
-    color: #fff;
-    text-decoration: none;
-}
-
-.project-tile a:hover {
-    background-color: #555;
-}
-
-/* Enlace al Perfil */
-.profile-link {
-    display: block;
-    text-align: center;
-    margin: 40px 0;
-    color: #f2f2f2;
-}
-
-.profile-link:hover {
-    text-decoration: underline;
-}
-
-/* Pie de Página */
-.footer {
-    background-color: #333;
+/* Estilos para el footer */
+footer {
+    background-color: var(--color30);
     color: #fff;
     text-align: center;
     padding: 20px 0;
 }
 
-.footer a {
-    display: inline-block;
-    margin-right: 10px;
+footer p {
+    margin: 0;
+}
+
+footer a {
     color: #fff;
     text-decoration: none;
 }
 
-.footer a:hover {
+footer a:hover {
     text-decoration: underline;
-}
-
-/* estilo para parpadeo */
-.blink {
-    visibility: hidden;
-}
-
-#welcome-text {
-    color: #333;
-    margin-right: 0;
-    padding-right: 0;
-    /* Elimina el margen inferior */
-}
-
-#welcome-underscore {
-    color: #333;
-    margin-left: 0;
-    padding-left: 0;
-    /* Elimina el margen superior */
-    display: inline-block;
-    /* Asegura que esté en la misma línea que el texto */
-}
-
-#text-container h1 {
-    display: inline-block;
-}
-
-#welcome-hello {
-    font-size: 500%;
-    color: #530a0a;
 }

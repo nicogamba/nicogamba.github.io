@@ -3,103 +3,149 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nombre del Emprendimiento</title>
     <link rel="stylesheet" href="styles.css">
-    <title>Nicolás Gamba Portafolio</title>
+    <link rel="icon" href="img/NegritaCocina-LogoNegro.png">
 </head>
 
 <body>
 
     <!-- Barra de Navegación -->
-    <nav id="navbar" class="navbar">
-        <ul class="navbar-ul">
-            <li><a href="#welcome-section">Bienvenida</a></li>
-            <li><a href="#projects">Proyectos</a></li>
-            <li><a href="#profile-link" target="_blank">Perfil</a></li>
-        </ul>
+    <nav>
+        <div class="logo">
+            <img src="img/NegritaCocina-LogoNegro.png" alt="Logo de Negrita Cocina">
+        </div>
+        <div class="secciones">
+            <a href="#carrusel">Carrusel</a>
+            <a href="#comidas">Comidas</a>
+            <a href="#redes">Redes Sociales</a>
+            <a href="#acerca">Quienes somos</a>
+        </div>
     </nav>
 
-    <!-- Sección de Bienvenida -->
-    <section id="welcome-section" class="welcome-section">
-        <h1 id="welcome-hello">Hello! I'm Nico</h1>
-        <div id="text-container">
-            <h1 id="welcome-text"></h1>
-            <h1 id="welcome-underscore">_</h1>
-        </div>
+    <!-- Sección Principal -->
+    <section class="principal">
+        <img src="img/NegritaCocina-LogoBlanco.png" alt="Logo de Negrita Cocina">
     </section>
 
-    <!-- Sección de Proyectos -->
-    <section id="projects" class="projects-section">
-        <div class="project-tile">
-            <h2>Proyecto 1</h2>
-            <p>Descripción del proyecto 1.</p>
-            <a href="#" target="_blank">Ver Proyecto</a>
+    <!-- Sección 6 imágenes -->
+    <!-- <section class="imagenes"> -->
+    <!-- Imágenes de arriba -->
+    <!-- <div class="fila">
+            <div class="imagen-tercio">
+                <img src="img/1.png" alt="Imagen 1">
+            </div>
+            <div class="imagen-tercio">
+                <img src="img/2.png" alt="Imagen 2">
+            </div>
+            <div class="imagen-tercio">
+                <img src="img/3.png" alt="Imagen 3">
+            </div>
+        </div> -->
+    <!-- Imágenes de abajo -->
+    <!-- <div class="fila">
+            <div class="imagen-tercio">
+                <img src="img/8.png" alt="Imagen 4">
+            </div>
+            <div class="imagen-tercio">
+                <img src="img/9.png" alt="Imagen 5">
+            </div>
+            <div class="imagen-tercio">
+                <img src="img/22.png" alt="Imagen 6">
+            </div>
         </div>
+    </section> -->
+
+    <!-- Carrusel de Imágenes -->
+    <!-- <section id="carrusel" class="carrusel">
+        <div class="carousel">
+            <img src="img/carru0.png" alt="Imagen 1">
+            <img src="img/carru1.png" alt="Imagen 2">
+            <img src="img/carru2.png" alt="Imagen 3">
+        </div>
+    </section> -->
+
+    <!-- Sección de Comidas -->
+    <section id="comidas" class="comidas">
+        <h1>Nuestras comidas</h1>
+        <div class="comida">
+            <div class="imagen">
+                <img src="img/comidas/baba_ganoush.png" alt="Comida 1">
+            </div>
+            <div class="info">
+                <h2>Baba ganoush</h2>
+                <p>Hoy vamos a preparar el dip de berenjena más famoso del mundo. A continuación, os traemos la receta
+                    del baba ganoush
+                    explicada con detalle, para que os quede tan rico que acabe siendo parte de vuestro recetario
+                    familiar.</p>
+            </div>
+        </div>
+        <div class="comida">
+            <div class="imagen">
+                <img src="img/comidas/falafel_garbanzos.png" alt="Comida 1">
+            </div>
+            <div class="infoizq">
+                <h2>Falafel de garbanzos</h2>
+                <p>El falafel consiste en unas deliciosas bolas de garbanzos triturados con especias, posteriormente
+                    fritas que
+                    habitualmente se sirven en pan de pita, acompañados de diferentes salsas como la salsa de yogur o
+                    tahini. A
+                    continuación, la receta original paso a paso.</p>
+            </div>
+        </div>
+        <div class="comida">
+            <div class="imagen">
+                <img src="img/comidas/hummus_garbanzos.png" alt="Comida 1">
+            </div>
+            <div class="info">
+                <h2>Hummus de garbanzos</h2>
+                <p>Es difícil encontrarse con alguien a quien no le guste el hummus y es que, su sabor suave,
+                    delicado y su textura
+                    sedosa lo hacen irresistible. Prepáralo con nuestra receta, para dipear con pan o con unos crudités
+                    de tus verduras
+                    favoritas.</p>
+            </div>
+        </div>
+        <div class="comida">
+            <div class="imagen">
+                <img src="img/comidas/kefta.png" alt="Comida 1">
+            </div>
+            <div class="infoizq">
+                <h2>Kefta o kofta</h2>
+                <p>Hoy vamos a preparar kefta o kofta, una especie de albóndigas de carne picada de ternera muy
+                    especiadas y con forma
+                    alargada, que se cocinan habitualmente a la plancha o a la parrilla. Esta es una receta muy popular
+                    en países como
+                    Turquía.</p>
+            </div>
+        </div>
+        <!-- Repetir estructura para más comidas -->
     </section>
 
-    <footer class="footer">
-        <!-- Enlace al Perfil -->
-        <a id="profile-link" class="profile-link" href="https://github.com/nicogamba" target="_blank">
-            Mi GitHub</a>
-        <a id="gitlab-link" class="profile-link" href="https://gitlab.com/nicolasgamba" target="_blank">
-            Mi GitLab</a>
+    <!-- Sección Acerca de Nosotros -->
+    <section id="acerca" class="acerca">
+        <h2>¿Quien es Negrita Cocina??</h2>
+        <p>Es un emprendimiento de una negrita que trae una propuesta diferente y exquisita a nuestro paladar</p>
+    </section>
+
+    <!-- Sección de Redes Sociales -->
+    <section id="redes" class="redes">
+        <div class="red">
+            <img src="img/wsp_logo.png" alt="Whatsapp">
+            <a href="https://wa.me/5492213640726">Whatsapp</a>
+        </div>
+        <div class="red">
+            <img src="img/instagram_logo.png" alt="Instagram">
+            <a href="https://www.instagram.com/negrita_cocina">negrita_cocina</a>
+        </div>
+        <!-- Repetir estructura para más redes sociales -->
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Derechos Reservados &copy; 2024 Negrita Cocina</p>
     </footer>
-
-    <script>
-        // script para aparición y parpadeo de texto
-        document.addEventListener("DOMContentLoaded", function () {
-            const welcomeText = document.getElementById("welcome-text");
-            const welcomeUnderscore = document.getElementById("welcome-underscore");
-
-            const texts = [
-                "¡",
-                "¡And I'm a developer!",
-                "¡And I'm a ",
-                "¡And I'm a guitarist!",
-                "¡",
-                "¡Y soy desarrollador!",
-                "¡Y soy ",
-                "¡Y soy programador!",
-                "¡Y soy ",
-                "¡Y soy guitarrista!",
-            ];
-            const blinkInterval = 500; // Intervalo de parpadeo en milisegundos
-            const resetInterval = 1500; // Intervalo de reinicio de texto
-
-            let index = 0;
-            let textIndex = 0;
-            let isTextIndexGoingUp = true;
-
-            function displayText() {
-                if (index < texts[textIndex].length) {
-                    welcomeText.textContent += texts[textIndex][index];
-                    index++;
-                    setTimeout(displayText, 100); // Ajusta la velocidad de aparición de los caracteres
-                } else if (index > texts[textIndex].length) {
-                    welcomeText.textContent = welcomeText.textContent.substring(0, welcomeText.textContent.length - 1);
-                    index--;
-                    setTimeout(displayText, 100);
-                } else {
-                    setTimeout(changeText, resetInterval);
-                }
-            }
-
-            function changeText() {
-                isTextIndexGoingUp ? textIndex++ : textIndex--;
-                if (textIndex == 0) {
-                    isTextIndexGoingUp = true;
-                } else if (textIndex == texts.length - 1) {
-                    isTextIndexGoingUp = false;
-                }
-                displayText();
-            }
-
-            setInterval(() => {
-                welcomeUnderscore.classList.toggle("blink");
-            }, blinkInterval);
-            displayText();
-        });
-    </script>
 
 </body>
 
