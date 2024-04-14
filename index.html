@@ -62,7 +62,7 @@
                     </li>
                 </ul>
                 </p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('tapeo_negrita_para_4_personas')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('tapeo_negrita_para_4_personas')">+</button>
@@ -79,7 +79,7 @@
                     especias, posteriormente
                     fritas que habitualmente se sirven en pan de pita, acompañados de diferentes salsas como la salsa de
                     yogurt o tahini.</p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('falafel_garbanzos')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('falafel_garbanzos')">+</button>
@@ -95,7 +95,7 @@
                 <p>Es quizás la ensalada más conocida dentro de la comida árabe. Tiene ingredientes muy habituales y es
                     una ensalada muy
                     refrescante y ligera, llena de sabor.</p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('tabule')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('tabule')">+</button>
@@ -111,7 +111,7 @@
                 <p>Es difícil encontrarse con alguien a quien no le guste el hummus y es que, su sabor suave, delicado y
                     su textura sedosalo hacen irresistible. Ideal para dipear con pan árabe o con unos crudités de tus
                     verduras favoritas.</p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('hummus_garbanzos')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('hummus_garbanzos')">+</button>
@@ -127,7 +127,7 @@
                 <p>Es un plato de pollo al horno con especias. La carne de pollo se macera con hierbas, especias y
                     limón, y se cocina al horno en forma de brocheta. ¡Una fiesta de sabor que te remontará al Líbano!
                 </p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('kofte_pollo')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('kofte_pollo')">+</button>
@@ -144,7 +144,7 @@
                     suele comer con pan de pita y es un delicioso dip que se puede disfrutar como aperitivo, snack o
                     entrante. Este plato es una alternativa al popular hummus, pero en lugar de garbanzos, utiliza
                     berenjenas como ingrediente principal.</p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('baba_ganoush')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('baba_ganoush')">+</button>
@@ -160,7 +160,7 @@
                 <p>Es un pan redondo y plano que se originó en el Medio Oriente. Ideal para rellenarlo con las opciones
                     de Negrita Cocina.
                 </p>
-                <div>
+                <div class="item-interaction-container">
                     <button onclick="quitar('pan_arabe')">-</button>
                     <p class="cant">0</p>
                     <button onclick="agregar('pan_arabe')">+</button>
@@ -209,8 +209,12 @@
         <p>Derechos Reservados &copy; 2024 Negrita Cocina</p>
     </footer>
 
-    <div class="boton-pedido">
-        <button onclick="hacerPedido()">hacer pedido</button>
+    <div id="boton-reset" class="boton-reset">
+        <button onclick="resetearPedido()">Vaciar<br>pedido</button>
+    </div>
+
+    <div id="boton-pedido" class="boton-pedido">
+        <button onclick="hacerPedido()">Pedir por WhatsApp</button>
     </div>
 
 </body>

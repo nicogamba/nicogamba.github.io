@@ -22,9 +22,33 @@ function quitar(id) {
     }
 }
 
+function visibilidadBoton() {
+    let botonReset = document.getElementById('boton-reset');
+    let botonPedido = document.getElementById('boton-pedido');
+    if (Object.keys(pedido).length === 0) {
+        botonReset.style.visibility = 'hidden';
+        botonPedido.style.visibility = 'hidden';
+    } else {
+        botonReset.style.visibility = 'visible';
+        botonPedido.style.visibility = 'visible';
+    }
+}
+
+function resetearPedido() {
+    let keys = Object.keys(pedido);
+    keys.forEach(key => {
+        pedido[key].cant = 0;
+        actualizarCant(key);
+    });
+    pedido = {};
+    visibilidadBoton();
+}
+
 function actualizarCant(id) {
     let cant = document.getElementById(id).getElementsByClassName('cant')[0];
     cant.innerHTML = pedido[id].cant;
+    sanitizarPedido();
+    visibilidadBoton();
 }
 
 function sanitizarPedido() {
