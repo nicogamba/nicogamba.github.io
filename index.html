@@ -7,6 +7,7 @@
     <title>NEGRITA COCINA</title>
     <link rel="stylesheet" href="styles.css">
     <link rel="icon" href="img/NegritaCocina-LogoNegro.png">
+    <script src="script.js"></script>
 </head>
 
 <body>
@@ -14,138 +15,203 @@
     <!-- Barra de Navegación -->
     <nav>
         <div class="logo">
-            <img src="img/NegritaCocina-LogoNegro.png" alt="Logo de Negrita Cocina">
+            <img src="img/NegritaCocina-LogoBlanco.png" alt="Logo de Negrita Cocina">
         </div>
         <div class="secciones">
-            <!-- <a href="#carrusel">Carrusel</a> -->
-            <a href="#comidas">Comidas</a>
-            <a href="#redes">Redes Sociales</a>
-            <a href="#acerca">Quienes somos</a>
+            <a href="#acerca">Conoceme</a>
+            <a href="#redes">Contactame</a>
         </div>
     </nav>
 
     <!-- Sección Principal -->
     <section class="principal">
-        <img src="img/NegritaCocina-LogoBlanco.png" alt="Logo de Negrita Cocina">
+        <img src="img/cocina_con_una_pizca_de_amor.png" alt="cocina_con_una_pizca_de_amor">
     </section>
-
-    <!-- Sección 6 imágenes -->
-    <!-- <section class="imagenes"> -->
-    <!-- Imágenes de arriba -->
-    <!-- <div class="fila">
-            <div class="imagen-tercio">
-                <img src="img/1.png" alt="Imagen 1">
-            </div>
-            <div class="imagen-tercio">
-                <img src="img/2.png" alt="Imagen 2">
-            </div>
-            <div class="imagen-tercio">
-                <img src="img/3.png" alt="Imagen 3">
-            </div>
-        </div> -->
-    <!-- Imágenes de abajo -->
-    <!-- <div class="fila">
-            <div class="imagen-tercio">
-                <img src="img/8.png" alt="Imagen 4">
-            </div>
-            <div class="imagen-tercio">
-                <img src="img/9.png" alt="Imagen 5">
-            </div>
-            <div class="imagen-tercio">
-                <img src="img/22.png" alt="Imagen 6">
-            </div>
-        </div>
-    </section> -->
-
-    <!-- Carrusel de Imágenes -->
-    <!-- <section id="carrusel" class="carrusel">
-        <div class="carousel">
-            <img src="img/carru0.png" alt="Imagen 1">
-            <img src="img/carru1.png" alt="Imagen 2">
-            <img src="img/carru2.png" alt="Imagen 3">
-        </div>
-    </section> -->
 
     <!-- Sección de Comidas -->
     <section id="comidas" class="comidas">
-        <h1>Nuestras comidas</h1>
-        <div class="comida">
+        <h1>Mi propuesta</h1>
+        <div id="tapeo_negrita_para_4_personas" class="comida">
             <div class="imagen">
-                <img src="img/comidas/baba_ganoush.png" alt="Comida 1">
+                <img src="img/comidas/tapeo_negrita_para_4_personas.jpeg" alt="tapeo_negrita_para_4_personas">
             </div>
             <div class="info">
-                <h2>Baba ganoush</h2>
-                <p>Hoy vamos a preparar el dip de berenjena más famoso del mundo. A continuación, os traemos la receta
-                    del baba ganoush
-                    explicada con detalle, para que os quede tan rico que acabe siendo parte de vuestro recetario
-                    familiar.</p>
+                <h2>Tapeo Negrita ~ Para 4 personas</h2>
+                <p>El tapeo va a contener:
+                <ul>
+                    <li>
+                        <p>Hummus 200gr</p>
+                    </li>
+                    <li>
+                        <p>Baba Gaboush 100 gr</p>
+                    </li>
+                    <li>
+                        <p>Falafel 6 unidades</p>
+                    </li>
+                    <li>
+                        <p>Kofté de pollo 6 unidades (acompañados por zanahorias asadas)</p>
+                    </li>
+                    <li>
+                        <p>Tabule 400 gr</p>
+                    </li>
+                    <li>
+                        <p>Pan pita 4 unidades pollo 6 unidades (acompañados por zanahorias asadas)</p>
+                    </li>
+                    <li>
+                        <p>Pan pita (árabe) 4 unidades</p>
+                    </li>
+                </ul>
+                </p>
+                <div>
+                    <button onclick="quitar('tapeo_negrita_para_4_personas')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('tapeo_negrita_para_4_personas')">+</button>
+                </div>
             </div>
         </div>
-        <div class="comida">
+        <div id="falafel_garbanzos" class="comida">
             <div class="imagen">
-                <img src="img/comidas/falafel_garbanzos.png" alt="Comida 1">
+                <img src="img/comidas/falafel_garbanzos.png" alt="falafel_garbanzos">
             </div>
             <div class="infoizq">
-                <h2>Falafel de garbanzos</h2>
-                <p>El falafel consiste en unas deliciosas bolas de garbanzos triturados con especias, posteriormente
-                    fritas que
-                    habitualmente se sirven en pan de pita, acompañados de diferentes salsas como la salsa de yogur o
-                    tahini. A
-                    continuación, la receta original paso a paso.</p>
+                <h2>Falafel</h2>
+                <p>Es un auténtico plato árabe que consiste en unas deliciosas bolas de garbanzos triturados con
+                    especias, posteriormente
+                    fritas que habitualmente se sirven en pan de pita, acompañados de diferentes salsas como la salsa de
+                    yogurt o tahini.</p>
+                <div>
+                    <button onclick="quitar('falafel_garbanzos')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('falafel_garbanzos')">+</button>
+                </div>
             </div>
         </div>
-        <div class="comida">
+        <div id="tabule" class="comida">
             <div class="imagen">
-                <img src="img/comidas/hummus_garbanzos.png" alt="Comida 1">
+                <img src="img/comidas/tabule.jpeg" alt="tabule">
             </div>
             <div class="info">
+                <h2>Tabule</h2>
+                <p>Es quizás la ensalada más conocida dentro de la comida árabe. Tiene ingredientes muy habituales y es
+                    una ensalada muy
+                    refrescante y ligera, llena de sabor.</p>
+                <div>
+                    <button onclick="quitar('tabule')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('tabule')">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="hummus_garbanzos" class="comida">
+            <div class="imagen">
+                <img src="img/comidas/hummus_garbanzos.png" alt="hummus_garbanzos">
+            </div>
+            <div class="infoizq">
                 <h2>Hummus de garbanzos</h2>
-                <p>Es difícil encontrarse con alguien a quien no le guste el hummus y es que, su sabor suave,
-                    delicado y su textura
-                    sedosa lo hacen irresistible. Prepáralo con nuestra receta, para dipear con pan o con unos crudités
-                    de tus verduras
-                    favoritas.</p>
+                <p>Es difícil encontrarse con alguien a quien no le guste el hummus y es que, su sabor suave, delicado y
+                    su textura sedosalo hacen irresistible. Ideal para dipear con pan árabe o con unos crudités de tus
+                    verduras favoritas.</p>
+                <div>
+                    <button onclick="quitar('hummus_garbanzos')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('hummus_garbanzos')">+</button>
+                </div>
             </div>
         </div>
-        <div class="comida">
+        <div id="kofte_pollo" class="comida">
             <div class="imagen">
-                <img src="img/comidas/kefta.png" alt="Comida 1">
+                <img src="img/comidas/kofte_pollo.jpeg" alt="kofte_pollo">
+            </div>
+            <div class="info">
+                <h2>Kofté de Pollo</h2>
+                <p>Es un plato de pollo al horno con especias. La carne de pollo se macera con hierbas, especias y
+                    limón, y se cocina al horno en forma de brocheta. ¡Una fiesta de sabor que te remontará al Líbano!
+                </p>
+                <div>
+                    <button onclick="quitar('kofte_pollo')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('kofte_pollo')">+</button>
+                </div>
+            </div>
+        </div>
+        <div id="baba_ganoush" class="comida">
+            <div class="imagen">
+                <img src="img/comidas/baba_ganoush_berenjena.jpeg" alt="baba_ganoush">
             </div>
             <div class="infoizq">
-                <h2>Kefta o kofta</h2>
-                <p>Hoy vamos a preparar kefta o kofta, una especie de albóndigas de carne picada de ternera muy
-                    especiadas y con forma
-                    alargada, que se cocinan habitualmente a la plancha o a la parrilla. Esta es una receta muy popular
-                    en países como
-                    Turquía.</p>
+                <h2>Baba Ganoush</h2>
+                <p>El Baba Ganoush es una pasta a base de puré de berenjena típica de la cocina árabe y mediterránea. Se
+                    suele comer con pan de pita y es un delicioso dip que se puede disfrutar como aperitivo, snack o
+                    entrante. Este plato es una alternativa al popular hummus, pero en lugar de garbanzos, utiliza
+                    berenjenas como ingrediente principal.</p>
+                <div>
+                    <button onclick="quitar('baba_ganoush')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('baba_ganoush')">+</button>
+                </div>
             </div>
         </div>
-        <!-- Repetir estructura para más comidas -->
+        <div id="pan_arabe" class="comida">
+            <div class="imagen">
+                <img src="img/comidas/pan_arabe.jpeg" alt="pan_arabe">
+            </div>
+            <div class="info">
+                <h2>Pan Pita o Árabe</h2>
+                <p>Es un pan redondo y plano que se originó en el Medio Oriente. Ideal para rellenarlo con las opciones
+                    de Negrita Cocina.
+                </p>
+                <div>
+                    <button onclick="quitar('pan_arabe')">-</button>
+                    <p class="cant">0</p>
+                    <button onclick="agregar('pan_arabe')">+</button>
+                </div>
+            </div>
+        </div>
     </section>
 
     <!-- Sección Acerca de Nosotros -->
     <section id="acerca" class="acerca">
-        <h2>¿Quien es Negrita Cocina??</h2>
-        <p>Es un emprendimiento de una negrita que trae una propuesta diferente y exquisita a nuestro paladar</p>
+        <h2>Conocé a Negrita Cocina</h2>
+        <p>Hola, soy Cele Primitivo, y les quiero dar la bienvenida a Negrita Cocina.</p>
+        <p>Vengo de familia libanesa y siempre fue mi anhelo tenerlos cerca y más si es a través de la comida.</p>
+        <p>Hace mucho vengo pensando en este emprendimiento, siempre cociné para agasajar a mi familia/amigos pero hoy
+            me animo a dar un paso más y acompañar la mesa y encuentros de quienes se animen a probar mi propuesta.
+        </p>
+        <p>
+            🤍
+        </p>
     </section>
 
     <!-- Sección de Redes Sociales -->
     <section id="redes" class="redes">
-        <div class="red">
-            <img src="img/wsp_logo.png" alt="Whatsapp">
-            <a href="https://wa.me/5492213640726">Whatsapp</a>
-        </div>
-        <div class="red">
-            <img src="img/instagram_logo.png" alt="Instagram">
-            <a href="https://www.instagram.com/negrita_cocina">negrita_cocina</a>
-        </div>
-        <!-- Repetir estructura para más redes sociales -->
+        <ul>
+            <li>
+                <div class="red">
+                    <div class="img-container">
+                        <img class="img-redes" src="img/wsp_logo.png" alt="Whatsapp">
+                    </div>
+                    <a href="https://wa.me/5492241506823" class="link-redes">¡Hacé click y escribime!</a>
+                </div>
+            </li>
+            <li>
+                <div class="red">
+                    <div class="img-container">
+                        <img class="img-redes" src="img/instagram_logo.png" alt="Instagram">
+                    </div>
+                    <a href="https://www.instagram.com/negrita_cocina" class="link-redes">¡Seguime en Instagram!</a>
+                </div>
+            </li>
+        </ul>
     </section>
 
     <!-- Footer -->
     <footer>
         <p>Derechos Reservados &copy; 2024 Negrita Cocina</p>
     </footer>
+
+    <div class="boton-pedido">
+        <button onclick="hacerPedido()">hacer pedido</button>
+    </div>
 
 </body>
 
