@@ -74,7 +74,7 @@
             wordLength.textContent = `Longitud de la palabra: ${data.wordLength}`;
         });
 
-        // Enviar el intento del jugador
+        // Enviar el intento del jugador cuando hace clic en el botón
         submitGuess.addEventListener('click', () => {
             const guess = guessInput.value.trim().toLowerCase();
             if (guess.length === 5) {
@@ -82,6 +82,19 @@
                 guessInput.value = '';
             } else {
                 alert('La palabra debe tener 5 letras.');
+            }
+        });
+
+        // Enviar el intento cuando se presiona la tecla Enter
+        guessInput.addEventListener('keydown', (event) => {
+            if (event.key === 'Enter') {
+                const guess = guessInput.value.trim().toLowerCase();
+                if (guess.length === 5) {
+                    socket.emit('guessWord', guess);
+                    guessInput.value = '';
+                } else {
+                    alert('La palabra debe tener 5 letras.');
+                }
             }
         });
 
