@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wordle en tiempo real</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f5f5f5;
+            margin: 0;
+        }
+        .game-container {
+            text-align: center;
+            width: 400px;
+        }
+        .input-box {
+            margin-top: 20px;
+        }
+        .input-box input {
+            padding: 10px;
+            font-size: 18px;
+            width: 200px;
+        }
+        .guesses {
+            margin-top: 20px;
+        }
+        .guess {
+            display: flex;
+            justify-content: center;
+            margin: 5px;
+            font-size: 16px;
+        }
+        .letter {
+            width: 40px;
+            height: 40px;
+            margin: 2px;
+            display: inline-block;
+            text-align: center;
+            line-height: 40px;
+            font-weight: bold;
+        }
+        .gray { background-color: gray; color: white; }
+        .red { background-color: red; color: white; }
+        .green { background-color: green; color: white; }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <h1>Wordle en tiempo real</h1>
+        <div id="wordLength"></div>
+        <div class="input-box">
+            <input type="text" id="guessInput" placeholder="Escribe tu adivinanza" maxlength="5">
+            <button id="submitGuess">Adivinar</button>
+        </div>
+        <div class="guesses" id="guessesList"></div>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        const guessInput = document.getElementById('guessInput');
+        const submitGuess = document.getElementById('submitGuess');
+        const wordLength = document.getElementById('wordLength');
+        const guessesList = document.getElementById('guessesList');
+
+        // Recibir la longitud de la palabra a adivinar
+        socket.on('startGame', (data) => {
+            wordLength.textContent = `Longitud de la palabra: ${data.wordLength}`;
+        });
+
+        // Enviar el intento del jugador
+        submitGuess.addEventListener('click', () => {
+            const guess = guessInput.value.trim().toLowerCase();
+            if (guess.length === 5) {
+                socket.emit('guessWord', guess);
+                guessInput.value = '';
+            } else {
+                alert('La palabra debe tener 5 letras.');
+            }
+        });
+
+        // Función para aplicar los colores a las letras según la adivinanza
+        function getLetterClasses(guess, word) {
+            return guess.split('').map((letter, index) => {
+                if (letter === word[index]) {
+                    return 'green';  // Correcta y en la posición correcta
+                } else if (word.includes(letter)) {
+                    return 'red';    // Está en la palabra pero en la posición incorrecta
+                } else {
+                    return 'gray';   // No está en la palabra
+                }
+            });
+        }
+
+        // Actualizar la lista de intentos
+        socket.on('updateGuesses', (guesses) => {
+            guessesList.innerHTML = '';
+            guesses.forEach((guess) => {
+                const guessElement = document.createElement('div');
+                guessElement.classList.add('guess');
+                
+                // Aplicar los colores a las letras
+                const letterClasses = getLetterClasses(guess, 'manza');  // Cambiar "manza" por currentWord
+                guess.split('').forEach((letter, index) => {
+                    const letterElement = document.createElement('div');
+                    letterElement.classList.add('letter', letterClasses[index]);
+                    letterElement.textContent = letter.toUpperCase();
+                    guessElement.appendChild(letterElement);
+                });
+
+                guessesList.appendChild(guessElement);
+            });
+        });
+
+        // Mostrar quién ha ganado
+        socket.on('gameOver', (data) => {
+            alert(`¡El jugador con ID ${data.winner} ha ganado! La palabra correcta era "${data.correctWord}"`);
+        });
+    </script>
+</body>
+</html>
