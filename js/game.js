@@ -4,6 +4,9 @@
 class TetrisScene extends Phaser.Scene {
     constructor() {
         super({ key: 'TetrisScene' });
+
+        // Inicializar colores en el constructor
+        this.colors = [0x0000ff, 0xffff00, 0xff0000]; // Azul, amarillo, rojo
     }
 
     preload() {
@@ -85,9 +88,21 @@ class TetrisScene extends Phaser.Scene {
             callbackScope: this,
             loop: true
         });
+
+        // Configurar temporizador para movimiento lateral
+        this.lastLateralMoveTime = 0;
+        this.lateralMoveCooldown = 150; // Tiempo mínimo entre movimientos laterales en milisegundos
+
+        this.input.keyboard.on('keydown-LEFT', () => {
+            this.handleLateralMove(-1);
+        });
+
+        this.input.keyboard.on('keydown-RIGHT', () => {
+            this.handleLateralMove(1);
+        });
     }
 
-    update() {
+    update(time) {
         // Mover pieza activa con controles
         if (this.cursors.left.isDown) {
             this.movePiece(-1);
@@ -102,16 +117,28 @@ class TetrisScene extends Phaser.Scene {
         }
     }
 
+    handleLateralMove(direction) {
+        const currentTime = this.time.now;
+        if (currentTime - this.lastLateralMoveTime > this.lateralMoveCooldown) {
+            this.movePiece(direction);
+            this.lastLateralMoveTime = currentTime;
+        }
+    }
+
     createPiece() {
         // Seleccionar una pieza aleatoria
         const index = Phaser.Math.Between(0, this.tetrominos.length - 1);
-        return this.tetrominos[index];
+        const shape = this.tetrominos[index];
+
+        // Asignar un único color aleatorio a toda la pieza
+        const color = this.colors[Phaser.Math.Between(0, this.colors.length - 1)];
+        return shape.map(row => row.map(cell => (cell ? color : 0)));
     }
 
     drawBoard() {
         for (let row = 0; row < this.rows; row++) {
             for (let col = 0; col < this.cols; col++) {
-                let color = this.board[row][col] ? 0xffffff : 0x444444;
+                let color = this.board[row][col] || 0x444444; // Usar el color del bloque o gris oscuro si está vacío
                 this.add.rectangle(
                     col * this.cellSize + this.cellSize / 2,
                     row * this.cellSize + this.cellSize / 2,
@@ -132,7 +159,7 @@ class TetrisScene extends Phaser.Scene {
                         (position.y + y) * this.cellSize + this.cellSize / 2,
                         this.cellSize - 2,
                         this.cellSize - 2,
-                        0xff0000
+                        cell // Usar el color del bloque
                     ).setStrokeStyle(1, 0x222222);
                 }
             });
@@ -140,10 +167,14 @@ class TetrisScene extends Phaser.Scene {
     }
 
     movePiece(direction) {
-        // Mover pieza activa a la izquierda o derecha
-        this.activePosition.x += direction;
-        this.drawBoard();
-        this.drawPiece(this.activePiece, this.activePosition);
+        const newPosition = { x: this.activePosition.x + direction, y: this.activePosition.y };
+
+        // Verificar colisiones antes de mover
+        if (!this.checkCollision(this.activePiece, newPosition)) {
+            this.activePosition = newPosition;
+            this.drawBoard();
+            this.drawPiece(this.activePiece, this.activePosition);
+        }
     }
 
     checkCollision(piece, position) {
@@ -169,41 +200,119 @@ class TetrisScene extends Phaser.Scene {
     }
 
     fixPiece(piece, position) {
+        // Fijar cada bloque de la pieza en el tablero
         piece.forEach((row, y) => {
             row.forEach((cell, x) => {
                 if (cell) {
                     const newX = position.x + x;
                     const newY = position.y + y;
                     if (this.board[newY]) {
-                        this.board[newY][newX] = 1;
+                        this.board[newY][newX] = cell; // Guardar el color del bloque
                     }
                 }
             });
         });
 
-        // Verificar y eliminar filas completas
-        this.clearFullRows();
+        // Aplicar gravedad a los bloques
+        this.applyGravity();
+
+        // Verificar y eliminar bloques conectados del mismo color
+        this.clearConnectedBlocks();
     }
 
-    clearFullRows() {
-        let rowsCleared = 0;
+    applyGravity() {
+        for (let col = 0; col < this.cols; col++) {
+            let emptyRow = this.rows - 1;
 
-        for (let row = this.rows - 1; row >= 0; row--) {
-            if (this.board[row].every(cell => cell === 1)) {
-                // Eliminar fila completa
-                this.board.splice(row, 1);
-                // Agregar una fila vacía al inicio
-                this.board.unshift(Array(this.cols).fill(0));
-                rowsCleared++;
-                row++; // Rechequear la misma fila tras el desplazamiento
+            for (let row = this.rows - 1; row >= 0; row--) {
+                if (this.board[row][col]) {
+                    // Si hay un bloque, moverlo hacia abajo
+                    const temp = this.board[row][col];
+                    this.board[row][col] = 0;
+                    this.board[emptyRow][col] = temp;
+                    emptyRow--;
+                }
+            }
+        }
+    }
+
+    clearConnectedBlocks() {
+        const visited = Array.from({ length: this.rows }, () => Array(this.cols).fill(false));
+
+        const isValid = (x, y) => x >= 0 && x < this.cols && y >= 0 && y < this.rows;
+
+        const dfs = (x, y, color) => {
+            if (!isValid(x, y) || visited[y][x] || this.board[y][x] !== color) return 0;
+
+            visited[y][x] = true;
+            let size = 1;
+
+            // Explorar las 4 direcciones
+            size += dfs(x + 1, y, color);
+            size += dfs(x - 1, y, color);
+            size += dfs(x, y + 1, color);
+            size += dfs(x, y - 1, color);
+
+            return size;
+        };
+
+        const removeConnected = (x, y, color) => {
+            if (!isValid(x, y) || this.board[y][x] !== color) return;
+
+            this.board[y][x] = 0;
+
+            // Explorar las 4 direcciones
+            removeConnected(x + 1, y, color);
+            removeConnected(x - 1, y, color);
+            removeConnected(x, y + 1, color);
+            removeConnected(x, y - 1, color);
+        };
+
+        for (let row = 0; row < this.rows; row++) {
+            for (let col = 0; col < this.cols; col++) {
+                if (this.board[row][col] && !visited[row][col]) {
+                    const color = this.board[row][col];
+                    const size = dfs(col, row, color);
+
+                    // Verificar si la conexión cubre de lado a lado
+                    const connectedCols = new Set();
+                    for (let r = 0; r < this.rows; r++) {
+                        for (let c = 0; c < this.cols; c++) {
+                            if (visited[r][c] && this.board[r][c] === color) {
+                                connectedCols.add(c);
+                            }
+                        }
+                    }
+
+                    if (connectedCols.size === this.cols) {
+                        // Eliminar bloques conectados
+                        removeConnected(col, row, color);
+                    }
+                }
             }
         }
 
-        // Actualizar puntaje
-        if (rowsCleared > 0) {
-            this.score += rowsCleared * 10;
-            this.scoreText.setText(`Puntaje: ${this.score}`);
-        }
+        // Aplicar gravedad después de eliminar bloques
+        this.applyGravity();
+    }
+
+    removeConnectedBlocks(x, y, color) {
+        const isValid = (x, y) => x >= 0 && x < this.cols && y >= 0 && y < this.rows;
+
+        const dfs = (x, y) => {
+            if (!isValid(x, y) || this.board[y][x] !== color) return;
+
+            this.board[y][x] = 0;
+
+            // Explorar las 4 direcciones
+            dfs(x + 1, y);
+            dfs(x - 1, y);
+            dfs(x, y + 1);
+            dfs(x, y - 1);
+        };
+
+        dfs(x, y);
+        this.applyGravity();
     }
 
     dropPiece() {
@@ -275,7 +384,11 @@ const config = {
     height: 640,
     parent: 'game-container',
     backgroundColor: '#222',
-    scene: [TetrisScene]
+    scene: [TetrisScene],
+    fps: {
+        target: 60, // Frecuencia de actualización a 60 Hz
+        forceSetTimeOut: true // Asegurar que se respete el objetivo
+    }
 };
 
 const game = new Phaser.Game(config);
