@@ -61,6 +61,10 @@ class TetrisScene extends Phaser.Scene {
         this.activePiece = this.createPiece();
         this.activePosition = { x: 3, y: 0 }; // Posición inicial
 
+        // Inicializar puntaje
+        this.score = 0;
+        this.scoreText = this.add.text(10, 10, 'Puntaje: 0', { fontSize: '16px', fill: '#fff' });
+
         // Dibujar el tablero vacío
         this.drawBoard();
         // Dibujar la pieza activa
@@ -163,6 +167,30 @@ class TetrisScene extends Phaser.Scene {
                 }
             });
         });
+
+        // Verificar y eliminar filas completas
+        this.clearFullRows();
+    }
+
+    clearFullRows() {
+        let rowsCleared = 0;
+
+        for (let row = this.rows - 1; row >= 0; row--) {
+            if (this.board[row].every(cell => cell === 1)) {
+                // Eliminar fila completa
+                this.board.splice(row, 1);
+                // Agregar una fila vacía al inicio
+                this.board.unshift(Array(this.cols).fill(0));
+                rowsCleared++;
+                row++; // Rechequear la misma fila tras el desplazamiento
+            }
+        }
+
+        // Actualizar puntaje
+        if (rowsCleared > 0) {
+            this.score += rowsCleared * 10;
+            this.scoreText.setText(`Puntaje: ${this.score}`);
+        }
     }
 
     dropPiece() {
