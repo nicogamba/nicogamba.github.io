@@ -77,6 +77,14 @@ class TetrisScene extends Phaser.Scene {
         this.input.keyboard.on('keydown-UP', () => {
             this.rotatePiece();
         });
+
+        // Configurar temporizador para que las piezas avancen automáticamente
+        this.time.addEvent({
+            delay: 500, // Intervalo en milisegundos
+            callback: this.autoDropPiece,
+            callbackScope: this,
+            loop: true
+        });
     }
 
     update() {
@@ -233,6 +241,31 @@ class TetrisScene extends Phaser.Scene {
             this.drawBoard();
             this.drawPiece(this.activePiece, this.activePosition);
         }
+    }
+
+    autoDropPiece() {
+        const newPosition = { x: this.activePosition.x, y: this.activePosition.y + 1 };
+
+        if (this.checkCollision(this.activePiece, newPosition)) {
+            this.fixPiece(this.activePiece, this.activePosition);
+            this.activePiece = this.createPiece();
+            this.activePosition = { x: 3, y: 0 };
+
+            // Verificar si el juego termina
+            if (this.checkCollision(this.activePiece, this.activePosition)) {
+                this.endGame();
+            }
+        } else {
+            this.activePosition = newPosition;
+        }
+
+        this.drawBoard();
+        this.drawPiece(this.activePiece, this.activePosition);
+    }
+
+    endGame() {
+        this.add.text(80, 320, '¡Juego Terminado!', { fontSize: '32px', fill: '#ff0000' });
+        this.scene.pause();
     }
 }
 
