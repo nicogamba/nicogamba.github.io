@@ -80,6 +80,8 @@ class TetrisScene extends Phaser.Scene {
 
         if (this.cursors.down.isDown) {
             this.dropPiece();
+        } else {
+            this.checkCollisionAndFix();
         }
     }
 
@@ -127,11 +129,63 @@ class TetrisScene extends Phaser.Scene {
         this.drawPiece(this.activePiece, this.activePosition);
     }
 
+    checkCollision(piece, position) {
+        return piece.some((row, y) => {
+            return row.some((cell, x) => {
+                if (cell) {
+                    const newX = position.x + x;
+                    const newY = position.y + y;
+
+                    // Verificar límites del tablero
+                    if (newX < 0 || newX >= this.cols || newY >= this.rows) {
+                        return true;
+                    }
+
+                    // Verificar colisión con otras piezas
+                    if (this.board[newY] && this.board[newY][newX]) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        });
+    }
+
+    fixPiece(piece, position) {
+        piece.forEach((row, y) => {
+            row.forEach((cell, x) => {
+                if (cell) {
+                    const newX = position.x + x;
+                    const newY = position.y + y;
+                    if (this.board[newY]) {
+                        this.board[newY][newX] = 1;
+                    }
+                }
+            });
+        });
+    }
+
     dropPiece() {
-        // Mover pieza activa hacia abajo
-        this.activePosition.y += 1;
+        const newPosition = { x: this.activePosition.x, y: this.activePosition.y + 1 };
+
+        if (this.checkCollision(this.activePiece, newPosition)) {
+            this.fixPiece(this.activePiece, this.activePosition);
+            this.activePiece = this.createPiece();
+            this.activePosition = { x: 3, y: 0 };
+        } else {
+            this.activePosition = newPosition;
+        }
+
         this.drawBoard();
         this.drawPiece(this.activePiece, this.activePosition);
+    }
+
+    checkCollisionAndFix() {
+        if (this.checkCollision(this.activePiece, this.activePosition)) {
+            this.fixPiece(this.activePiece, this.activePosition);
+            this.activePiece = this.createPiece();
+            this.activePosition = { x: 3, y: 0 };
+        }
     }
 }
 
