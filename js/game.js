@@ -72,6 +72,11 @@ class TetrisScene extends Phaser.Scene {
 
         // Configurar controles
         this.cursors = this.input.keyboard.createCursorKeys();
+
+        // Agregar rotación al presionar la tecla arriba
+        this.input.keyboard.on('keydown-UP', () => {
+            this.rotatePiece();
+        });
     }
 
     update() {
@@ -213,6 +218,20 @@ class TetrisScene extends Phaser.Scene {
             this.fixPiece(this.activePiece, this.activePosition);
             this.activePiece = this.createPiece();
             this.activePosition = { x: 3, y: 0 };
+        }
+    }
+
+    rotatePiece() {
+        // Crear una copia rotada de la pieza activa
+        const rotatedPiece = this.activePiece[0].map((_, index) =>
+            this.activePiece.map(row => row[index]).reverse()
+        );
+
+        // Verificar colisiones con la pieza rotada
+        if (!this.checkCollision(rotatedPiece, this.activePosition)) {
+            this.activePiece = rotatedPiece;
+            this.drawBoard();
+            this.drawPiece(this.activePiece, this.activePosition);
         }
     }
 }
