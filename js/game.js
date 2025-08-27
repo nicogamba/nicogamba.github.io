@@ -57,12 +57,36 @@ class TetrisScene extends Phaser.Scene {
             ]
         ];
 
+        // Inicializar pieza activa
+        this.activePiece = this.createPiece();
+        this.activePosition = { x: 3, y: 0 }; // Posición inicial
+
         // Dibujar el tablero vacío
         this.drawBoard();
+        // Dibujar la pieza activa
+        this.drawPiece(this.activePiece, this.activePosition);
+
+        // Configurar controles
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
 
     update() {
-        // Actualización del juego
+        // Mover pieza activa con controles
+        if (this.cursors.left.isDown) {
+            this.movePiece(-1);
+        } else if (this.cursors.right.isDown) {
+            this.movePiece(1);
+        }
+
+        if (this.cursors.down.isDown) {
+            this.dropPiece();
+        }
+    }
+
+    createPiece() {
+        // Seleccionar una pieza aleatoria
+        const index = Phaser.Math.Between(0, this.tetrominos.length - 1);
+        return this.tetrominos[index];
     }
 
     drawBoard() {
@@ -78,6 +102,36 @@ class TetrisScene extends Phaser.Scene {
                 ).setStrokeStyle(1, 0x222222);
             }
         }
+    }
+
+    drawPiece(piece, position) {
+        piece.forEach((row, y) => {
+            row.forEach((cell, x) => {
+                if (cell) {
+                    this.add.rectangle(
+                        (position.x + x) * this.cellSize + this.cellSize / 2,
+                        (position.y + y) * this.cellSize + this.cellSize / 2,
+                        this.cellSize - 2,
+                        this.cellSize - 2,
+                        0xff0000
+                    ).setStrokeStyle(1, 0x222222);
+                }
+            });
+        });
+    }
+
+    movePiece(direction) {
+        // Mover pieza activa a la izquierda o derecha
+        this.activePosition.x += direction;
+        this.drawBoard();
+        this.drawPiece(this.activePiece, this.activePosition);
+    }
+
+    dropPiece() {
+        // Mover pieza activa hacia abajo
+        this.activePosition.y += 1;
+        this.drawBoard();
+        this.drawPiece(this.activePiece, this.activePosition);
     }
 }
 
