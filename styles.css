@@ -1,0 +1,177 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', Arial, sans-serif;
+  background: linear-gradient(135deg, #0a2342 0%, #274472 100%);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.profile-pic {
+  width: 140px;
+  height: 140px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+  margin-bottom: 1.5rem;
+  border: 4px solid #fff;
+  background: #fff;
+  animation: fadeIn 1.2s;
+}
+
+h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.description {
+  font-size: 1.1rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  color: #dbe9f4;
+}
+
+.social-icons {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+
+.social-icons a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  height: 72px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 12px rgba(10,35,66,0.15);
+  transition: transform 0.2s, box-shadow 0.2s;
+  animation: fadeInUp 1s;
+}
+
+.social-icons a:hover {
+  transform: scale(1.12);
+  box-shadow: 0 4px 24px rgba(39,68,114,0.25);
+}
+
+
+.social-icons img, .social-icons svg {
+  width: 48px;
+  height: 48px;
+}
+
+.easycommerce-link {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.conocenos-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  background: #fff;
+  color: #274472;
+  font-weight: 700;
+  font-size: 1.1rem;
+  border: none;
+  border-radius: 32px;
+  padding: 0.7rem 1.6rem;
+  box-shadow: 0 2px 12px rgba(10,35,66,0.15);
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s, transform 0.2s;
+  animation: fadeInUp 1s;
+}
+
+.conocenos-btn:hover {
+  background: #274472;
+  color: #fff;
+  box-shadow: 0 4px 24px rgba(39,68,114,0.25);
+  transform: scale(1.05);
+}
+
+.easycommerce-logo {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: #fff;
+}
+
+footer {
+  text-align: center;
+  padding: 1.2rem 0 0.8rem 0;
+  background: rgba(10,35,66,0.95);
+  color: #dbe9f4;
+  font-size: 0.95rem;
+}
+
+footer a {
+  color: #fff;
+  text-decoration: underline;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #a7c7e7;
+}
+
+.fade-in {
+  animation: fadeIn 1.2s;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(40px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@media (max-width: 600px) {
+  .container {
+    padding: 1rem;
+  }
+  h1 {
+    font-size: 1.3rem;
+  }
+  .profile-pic {
+    width: 100px;
+    height: 100px;
+  }
+  .social-icons {
+    gap: 1rem;
+  }
+  .social-icons a {
+    width: 56px;
+    height: 56px;
+  }
+  .social-icons img, .social-icons svg {
+    width: 36px;
+    height: 36px;
+  }
+  .conocenos-btn {
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .easycommerce-logo {
+    width: 24px;
+    height: 24px;
+  }
+}
