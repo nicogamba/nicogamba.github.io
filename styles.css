@@ -773,6 +773,49 @@ img {
   font-size: 0.92rem;
 }
 
+/* Education */
+.section--compact {
+  padding: 4rem 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-top: 2.25rem;
+}
+
+.edu-card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.5rem;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.edu-card:hover {
+  border-color: var(--border-strong);
+  transform: translateY(-3px);
+}
+
+.edu-card h3 {
+  font-size: 1.05rem;
+  margin-bottom: 0.65rem;
+}
+
+.edu-card__meta {
+  color: var(--muted);
+  font-size: 0.92rem;
+}
+
+.edu-card__meta--accent {
+  margin-top: 0.15rem;
+  color: var(--accent);
+  font-size: 0.85rem;
+}
+
 /* Contact */
 .contact__actions {
   display: flex;
@@ -868,6 +911,7 @@ button:focus-visible {
   .skill-card:hover,
   .project-card:hover,
   .service-card:hover,
+  .edu-card:hover,
   .contact__links a:hover {
     transform: none;
   }

@@ -4,12 +4,12 @@
   var STORAGE_KEY = 'ng-lang';
   var translations = {
     en: {
-      title: 'Nicolás Gamba — Tech Lead & Cloud Backend Engineer',
-      description: 'Tech Lead & Cloud Backend Engineer with 7+ years building production systems with PHP/Symfony, PostgreSQL and AWS. Co-Founder & CTO at Orbix-IT.'
+      title: 'Nicolás Gamba — Tech Lead Backend & Cloud Architect',
+      description: 'Tech Lead Backend & Cloud Architect with 7+ years designing, scaling and stabilizing high-concurrency e-commerce and multi-tenant SaaS platforms on AWS. Co-Founder & CTO at Orbix-IT.'
     },
     es: {
-      title: 'Nicolás Gamba — Tech Lead & Ingeniero Backend Cloud',
-      description: 'Tech Lead e Ingeniero Backend Cloud con más de 7 años construyendo sistemas en producción con PHP/Symfony, PostgreSQL y AWS. Co-Founder y CTO en Orbix-IT.'
+      title: 'Nicolás Gamba — Tech Lead Backend & Arquitecto Cloud',
+      description: 'Tech Lead Backend y Arquitecto Cloud con más de 7 años diseñando, escalando y estabilizando plataformas e-commerce de alta concurrencia y SaaS multi-tenant en AWS. Co-Founder y CTO en Orbix-IT.'
     }
   };
 
